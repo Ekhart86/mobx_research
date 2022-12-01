@@ -55,14 +55,14 @@ class CounterExampleState extends State<CounterExample> {
         backgroundColor: Colors.blue,
         title: const Text('MobX Counter'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 50.0),
-            Observer(
-              builder: (_) {
-                return counter.isLoading
+      body: Observer(
+        builder: (_) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(height: 50.0),
+                counter.isLoading
                     ? const SizedBox(
                         width: 50,
                         height: 50,
@@ -75,29 +75,31 @@ class CounterExampleState extends State<CounterExample> {
                           '${counter.value}',
                           style: const TextStyle(fontSize: 40),
                         ),
-                      );
-              },
+                      ),
+                const SizedBox(height: 50.0),
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed:
+                        counter.isLockedButtons ? () {} : counter.increment,
+                    child: const Text('Increment'),
+                  ),
+                ),
+                const SizedBox(height: 50.0),
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed:
+                        counter.isLockedButtons ? () {} : counter.decrement,
+                    child: const Text('Decrement'),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 50.0),
-            SizedBox(
-              height: 50,
-              width: 200,
-              child: ElevatedButton(
-                onPressed: counter.isLockedButtons ? () {} : counter.increment,
-                child: const Text('Increment'),
-              ),
-            ),
-            const SizedBox(height: 50.0),
-            SizedBox(
-              height: 50,
-              width: 200,
-              child: ElevatedButton(
-                onPressed: counter.isLockedButtons ? () {} : counter.decrement,
-                child: const Text('Decrement'),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
