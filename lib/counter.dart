@@ -12,26 +12,19 @@ abstract class _Counter with Store {
   @observable
   bool isLoading = false;
 
-  @observable
-  bool isLockedButtons = false;
-
   @action
   Future<void> increment() async {
-    isLockedButtons = true;
     isLoading = true;
     await Future.delayed(const Duration(seconds: 1));
     value++;
     isLoading = false;
-    isLockedButtons = false;
   }
 
   @action
   Future<void> decrement() async {
-    isLockedButtons = true;
     isLoading = true;
     await Future.delayed(const Duration(seconds: 1));
     value--;
     isLoading = false;
-    isLockedButtons = false;
   }
 }

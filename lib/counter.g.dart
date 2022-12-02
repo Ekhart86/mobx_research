@@ -40,22 +40,6 @@ mixin _$Counter on _Counter, Store {
     });
   }
 
-  late final _$isLockedButtonsAtom =
-      Atom(name: '_Counter.isLockedButtons', context: context);
-
-  @override
-  bool get isLockedButtons {
-    _$isLockedButtonsAtom.reportRead();
-    return super.isLockedButtons;
-  }
-
-  @override
-  set isLockedButtons(bool value) {
-    _$isLockedButtonsAtom.reportWrite(value, super.isLockedButtons, () {
-      super.isLockedButtons = value;
-    });
-  }
-
   late final _$incrementAsyncAction =
       AsyncAction('_Counter.increment', context: context);
 
@@ -76,8 +60,7 @@ mixin _$Counter on _Counter, Store {
   String toString() {
     return '''
 value: ${value},
-isLoading: ${isLoading},
-isLockedButtons: ${isLockedButtons}
+isLoading: ${isLoading}
     ''';
   }
 }

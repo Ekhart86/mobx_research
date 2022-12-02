@@ -57,17 +57,15 @@ class CounterExampleState extends State<CounterExample> {
       ),
       body: Observer(
         builder: (_) {
+          final isLoading = counter.isLoading;
+
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 50.0),
-                counter.isLoading
-                    ? const SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: Center(child: CircularProgressIndicator()),
-                      )
+                isLoading
+                    ? const _LoadingIndicator()
                     : SizedBox(
                         width: 50,
                         height: 50,
@@ -81,8 +79,7 @@ class CounterExampleState extends State<CounterExample> {
                   height: 50,
                   width: 200,
                   child: ElevatedButton(
-                    onPressed:
-                        counter.isLockedButtons ? () {} : counter.increment,
+                    onPressed: isLoading ? () {} : counter.increment,
                     child: const Text('Increment'),
                   ),
                 ),
@@ -91,8 +88,7 @@ class CounterExampleState extends State<CounterExample> {
                   height: 50,
                   width: 200,
                   child: ElevatedButton(
-                    onPressed:
-                        counter.isLockedButtons ? () {} : counter.decrement,
+                    onPressed: isLoading ? () {} : counter.decrement,
                     child: const Text('Decrement'),
                   ),
                 ),
@@ -141,6 +137,19 @@ class CounterExampleState extends State<CounterExample> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SecondScreen()),
+    );
+  }
+}
+
+class _LoadingIndicator extends StatelessWidget {
+  const _LoadingIndicator({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 50,
+      height: 50,
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }
